@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/Lenovo/Desktop/Faks/IV godina/Razvoj mobilnih aplikacija/Konstrukcijske vjezbe/Azil za pse - RMA projektni zadatak/Azil za pse - RMA projektni zadatak/app/src/main/res/drawable/border.xml" value="0.215" />
+        <entry key="..\:/Users/Lenovo/Desktop/Faks/IV godina/Razvoj mobilnih aplikacija/Konstrukcijske vjezbe/Azil za pse - RMA projektni zadatak/Azil za pse - RMA projektni zadatak/app/src/main/res/drawable/dog_background.xml" value="0.1685" />
+        <entry key="..\:/Users/Lenovo/Desktop/Faks/IV godina/Razvoj mobilnih aplikacija/Konstrukcijske vjezbe/Azil za pse - RMA projektni zadatak/Azil za pse - RMA projektni zadatak/app/src/main/res/drawable/ic_baseline_arrow_back_ios_24.xml" value="0.1685" />
+        <entry key="..\:/Users/Lenovo/Desktop/Faks/IV godina/Razvoj mobilnih aplikacija/Konstrukcijske vjezbe/Azil za pse - RMA projektni zadatak/Azil za pse - RMA projektni zadatak/app/src/main/res/drawable/ic_wave.xml" value="0.1" />
+        <entry key="..\:/Users/Lenovo/Desktop/Faks/IV godina/Razvoj mobilnih aplikacija/Konstrukcijske vjezbe/Azil za pse - RMA projektni zadatak/Azil za pse - RMA projektni zadatak/app/src/main/res/drawable/login_button.xml" value="0.1685" />
+        <entry key="..\:/Users/Lenovo/Desktop/Faks/IV godina/Razvoj mobilnih aplikacija/Konstrukcijske vjezbe/Azil za pse - RMA projektni zadatak/Azil za pse - RMA projektni zadatak/app/src/main/res/drawable/register_button.xml" value="0.1685" />
+        <entry key="..\:/Users/Lenovo/Desktop/Faks/IV godina/Razvoj mobilnih aplikacija/Konstrukcijske vjezbe/Azil za pse - RMA projektni zadatak/Azil za pse - RMA projektni zadatak/app/src/main/res/drawable/shape.xml" value="0.22" />
+        <entry key="..\:/Users/Lenovo/Desktop/Faks/IV godina/Razvoj mobilnih aplikacija/Konstrukcijske vjezbe/Azil za pse - RMA projektni zadatak/Azil za pse - RMA projektni zadatak/app/src/main/res/layout/activity_main.xml" value="0.1557632398753894" />
+        <entry key="..\:/Users/Lenovo/Desktop/Faks/IV godina/Razvoj mobilnih aplikacija/Konstrukcijske vjezbe/Azil za pse - RMA projektni zadatak/Azil za pse - RMA projektni zadatak/app/src/main/res/layout/activity_showcase.xml" value="0.15348439504061565" />
+        <entry key="..\:/Users/Lenovo/Desktop/Faks/IV godina/Razvoj mobilnih aplikacija/Konstrukcijske vjezbe/Azil za pse - RMA projektni zadatak/Azil za pse - RMA projektni zadatak/app/src/main/res/layout/activity_welcome.xml" value="0.27107887579329104" />
+        <entry key="..\:/Users/Lenovo/Desktop/Faks/IV godina/Razvoj mobilnih aplikacija/Konstrukcijske vjezbe/Azil za pse - RMA projektni zadatak/Azil za pse - RMA projektni zadatak/app/src/main/res/layout/login_fragment.xml" value="0.33" />
+        <entry key="..\:/Users/Lenovo/Desktop/Faks/IV godina/Razvoj mobilnih aplikacija/Konstrukcijske vjezbe/Azil za pse - RMA projektni zadatak/Azil za pse - RMA projektni zadatak/app/src/main/res/layout/register_fragment.xml" value="0.2975630611372381" />
+        <entry key="..\:/Users/Lenovo/Desktop/Faks/IV godina/Razvoj mobilnih aplikacija/Konstrukcijske vjezbe/Azil za pse - RMA projektni zadatak/Azil za pse - RMA projektni zadatak/app/src/main/res/layout/register_validation_fragment.xml" value="0.26506024096385544" />
+        <entry key="..\:/Users/Lenovo/Desktop/Faks/IV godina/Razvoj mobilnih aplikacija/Konstrukcijske vjezbe/Azil za pse - RMA projektni zadatak/Azil za pse - RMA projektni zadatak/app/src/main/res/layout/welcome_fragment.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/account_fragment.xml" value="0.33177083333333335" />
+        <entry key="app/src/main/res/layout/admin_fragment.xml" value="0.33177083333333335" />
+        <entry key="app/src/main/res/layout/adopt_fragment.xml" value="0.33177083333333335" />
+        <entry key="app/src/main/res/layout/display_fragment.xml" value="0.33177083333333335" />
+        <entry key="app/src/main/res/layout/dog_cell.xml" value="0.33177083333333335" />
+        <entry key="app/src/main/res/layout/input_fragment.xml" value="0.33177083333333335" />
+        <entry key="app/src/main/res/layout/location_fragment.xml" value="0.33177083333333335" />
+        <entry key="app/src/main/res/layout/login_fragment.xml" value="0.33177083333333335" />
+        <entry key="app/src/main/res/layout/register_fragment.xml" value="0.33177083333333335" />
+        <entry key="app/src/main/res/layout/showcase_activity.xml" value="0.33177083333333335" />
+        <entry key="app/src/main/res/layout/welcome_fragment.xml" value="0.33177083333333335" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.208" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

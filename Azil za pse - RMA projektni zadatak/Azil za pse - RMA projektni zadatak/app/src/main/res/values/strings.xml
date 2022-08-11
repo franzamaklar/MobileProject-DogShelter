@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">adoPET me</string>
+    <string name="log_in">Log in</string>
+    <string name="register">Register</string>
+    <string name="consentText">By signing up, you are giving consent to analysis of your data by adoPET me</string>
+</resources>

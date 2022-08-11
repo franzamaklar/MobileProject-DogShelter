@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/welcomeFragment">
+
+    <fragment
+        android:id="@+id/welcomeFragment"
+        android:name="com.example.adopetme.ui.welcome.WelcomeFragment"
+        android:label="MainActivity"
+        tools:layout="@layout/welcome_fragment">
+        <action
+            android:id="@+id/action_welcomeFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_welcomeFragment_to_registerFragment"
+            app:destination="@id/registerFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.adopetme.ui.login.LoginFragment"
+        android:label="LoginFragment"
+        tools:layout="@layout/login_fragment">
+        <action
+            android:id="@+id/action_loginFragment_to_welcomeFragment"
+            app:destination="@id/welcomeFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="com.example.adopetme.ui.register.RegisterFragment"
+        android:label="RegisterFragment"
+        tools:layout="@layout/register_fragment">
+        <action
+            android:id="@+id/action_registerFragment_to_welcomeFragment"
+            app:destination="@id/welcomeFragment" />
+        <action
+            android:id="@+id/action_registerFragment_to_registerValidationFragment"
+            app:destination="@id/registerValidationFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/registerValidationFragment"
+        android:name="com.example.adopetme.ui.register.RegisterValidationFragment"
+        android:label="RegisterValidationFragment"
+        tools:layout="@layout/register_validation_fragment">
+        <action
+            android:id="@+id/action_registerValidationFragment_to_welcomeFragment"
+            app:destination="@id/welcomeFragment" />
+        <action
+            android:id="@+id/action_registerValidationFragment_to_registerFragment"
+            app:destination="@id/registerFragment" />
+        <argument
+            android:name="credentials"
+            app:argType="string"/>
+    </fragment>
+
+</navigation>
