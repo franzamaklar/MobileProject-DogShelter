@@ -48,6 +48,8 @@ class RegisterValidationFragment : Fragment() {
         findNavController().navigate(action)
     }
 
+    //Edit everything around signup
+
     private fun signup() {
         val output = args.credentials
         val username = binding.usernameET.text.toString()

@@ -40,6 +40,8 @@ class LoginFragment: Fragment() {
         findNavController().navigate(action)
     }
 
+    //Edit everything around login
+
     private fun login() {
         val email = binding.emailET.text.toString().trim()
         val password = binding.passwordET.text.toString().trim()

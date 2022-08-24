@@ -8,4 +8,6 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="accent_green">#9CFF4E</color>
+    <color name="gradientAccentOne">#9CFF4E</color>
+    <color name="gradientAccentTwo">#DBFF00</color>
 </resources>

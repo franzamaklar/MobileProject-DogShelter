@@ -1,6 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/app_navigation">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/displayFragment">
+
+    <fragment
+        android:id="@+id/displayFragment"
+        android:name="com.example.adopetme.ui.display.DisplayFragment"
+        android:label="DisplayFragment"
+        tools:layout="@layout/display_fragment">
+        <action
+            android:id="@+id/action_displayFragment_to_adoptFragment"
+            app:destination="@id/adoptFragment"
+            app:enterAnim="@anim/slide_from_left"
+            app:exitAnim="@anim/slide_to_right"
+            app:popEnterAnim="@anim/slide_from_right"
+            app:popExitAnim="@anim/slide_to_left"
+            />
+        <action
+            android:id="@+id/action_displayFragment_to_profileFragment"
+            app:destination="@id/profileFragment"
+            app:enterAnim="@anim/slide_from_left"
+            app:exitAnim="@anim/slide_to_right"
+            app:popEnterAnim="@anim/slide_from_right"
+            app:popExitAnim="@anim/slide_to_left"
+            />
+        <action
+            android:id="@+id/action_displayFragment_to_searchFragment"
+            app:destination="@id/searchFragment"
+            app:enterAnim="@anim/slide_from_left"
+            app:exitAnim="@anim/slide_to_right"
+            app:popEnterAnim="@anim/slide_from_right"
+            app:popExitAnim="@anim/slide_to_left"
+            />
+        <action
+            android:id="@+id/action_displayFragment_to_inputFragment"
+            app:destination="@id/inputFragment"
+            app:enterAnim="@anim/slide_from_up"
+            app:exitAnim="@anim/slide_down"
+            app:popEnterAnim="@anim/slide_up"
+            app:popExitAnim="@anim/slide_from_down" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/adoptFragment"
+        android:name="com.example.adopetme.ui.adopt.AdoptFragment"
+        android:label="AdoptFragment"
+        tools:layout="@layout/adopt_fragment">
+        <action
+            android:id="@+id/action_adoptFragment_to_displayFragment"
+            app:destination="@id/displayFragment"
+            app:enterAnim="@anim/slide_from_left"
+            app:exitAnim="@anim/slide_to_right"
+            app:popEnterAnim="@anim/slide_from_right"
+            app:popExitAnim="@anim/slide_to_left"
+            />
+        <argument
+            android:name="dogId"
+            app:argType="long"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.adopetme.ui.profile.ProfileFragment"
+        android:label="ProfileFragment"
+        tools:layout="@layout/profile_fragment">
+        <action
+            android:id="@+id/action_profileFragment_to_displayFragment"
+            app:destination="@id/displayFragment"
+            app:enterAnim="@anim/slide_from_left"
+            app:exitAnim="@anim/slide_to_right"
+            app:popEnterAnim="@anim/slide_from_right"
+            app:popExitAnim="@anim/slide_to_left"
+            />
+    </fragment>
+
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.example.adopetme.ui.search.SearchFragment"
+        android:label="SearchFragment"
+        tools:layout="@layout/search_fragment">
+        <action
+            android:id="@+id/action_searchFragment_to_displayFragment"
+            app:destination="@id/displayFragment"
+            app:enterAnim="@anim/slide_from_left"
+            app:exitAnim="@anim/slide_to_right"
+            app:popEnterAnim="@anim/slide_from_right"
+            app:popExitAnim="@anim/slide_to_left"
+            />
+    </fragment>
+    <fragment
+        android:id="@+id/inputFragment"
+        android:name="com.example.adopetme.input.InputFragment"
+        android:label="InputFragment"
+        tools:layout="@layout/input_fragment">
+        <action
+            android:id="@+id/action_inputFragment_to_displayFragment"
+            app:destination="@id/displayFragment"
+            app:enterAnim="@anim/slide_up"
+            app:exitAnim="@anim/slide_from_down"
+             />
+    </fragment>
 
 </navigation>

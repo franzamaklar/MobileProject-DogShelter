@@ -28,6 +28,8 @@ class RegisterFragment : Fragment() {
         findNavController().navigate(action)
     }
 
+    //Edit everything around signup
+
     private fun moveToValidate() {
         val email = binding.emailET.text.toString()
         val password = binding.passwordET.text.toString()

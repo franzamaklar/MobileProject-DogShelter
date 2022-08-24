@@ -3,4 +3,13 @@
     <string name="log_in">Log in</string>
     <string name="register">Register</string>
     <string name="consentText">By signing up, you are giving consent to analysis of your data by adoPET me</string>
+    <string name="titleDisplay">Discover</string>
+    <string name="descriptionDisplay">What\'s new today</string>
+    <string name="breedHolder">BREED:</string>
+    <string name="nameHolder">NAME:</string>
+    <string name="ageHolder">AGE:</string>
+    <string name="genderHolder">GENDER:</string>
+    <string name="title_activity_maps">MapsActivity</string>
+    <string name="log_out">LOG OUT</string>
+    <string name="upload_picture">UPLOAD PICTURE</string>
 </resources>

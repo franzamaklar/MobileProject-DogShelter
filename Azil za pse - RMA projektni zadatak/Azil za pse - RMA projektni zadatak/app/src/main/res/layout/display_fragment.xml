@@ -1,6 +1,129 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white">
+
+
+    <TextView
+        android:id="@+id/titleDisplay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginHorizontal="12dp"
+        android:layout_marginVertical="40dp"
+        android:text="@string/titleDisplay"
+        android:textColor="@color/black"
+        android:textSize="45sp"
+        android:fontFamily="@font/comfortaa"
+        />
+
+    <TextView
+        android:id="@+id/descriptionDisplay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/titleDisplay"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginVertical="25dp"
+        android:fontFamily="@font/exo_2"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:textSize="17sp"
+        android:textAllCaps="true"
+        android:text="@string/descriptionDisplay"
+        />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/dogRecycler"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/descriptionDisplay"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginVertical="25dp"
+        />
+
+    <TextView
+        android:id="@+id/iconsBorder"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="30dp"
+        app:layout_constraintTop_toBottomOf="@id/dogRecycler"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:background="@color/black"
+        android:alpha="0.2"
+        />
+
+    <Button
+        android:id="@+id/iconHome"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        app:layout_constraintTop_toBottomOf="@id/iconsBorder"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginStart="20dp"
+        android:layout_marginVertical="15dp"
+        android:background="@drawable/ic_home"
+        />
+
+    <Button
+        android:id="@+id/iconMap"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        app:layout_constraintTop_toBottomOf="@id/iconsBorder"
+        app:layout_constraintLeft_toLeftOf="@id/iconHome"
+        android:layout_marginStart="70dp"
+        android:layout_marginVertical="15dp"
+        android:background="@drawable/ic_map"
+        />
+
+    <ImageView
+        android:id="@+id/borderHolder"
+        android:layout_width="50dp"
+        android:layout_height="25dp"
+        app:layout_constraintTop_toBottomOf="@id/iconsBorder"
+        app:layout_constraintLeft_toLeftOf="@id/iconMap"
+        android:layout_marginStart="70dp"
+        android:layout_marginVertical="15dp"
+        android:background="@drawable/rounded_rectangle"
+        android:alpha="0.7"
+        />
+
+    <Button
+        android:id="@+id/iconAdd"
+        android:layout_width="23dp"
+        android:layout_height="23dp"
+        app:layout_constraintTop_toBottomOf="@id/iconsBorder"
+        app:layout_constraintLeft_toLeftOf="@id/iconMap"
+        android:layout_marginStart="82dp"
+        android:layout_marginVertical="15dp"
+        android:background="@drawable/ic_add"
+        android:fontFamily="@font/exo_2"
+        />
+
+    <Button
+        android:id="@+id/iconSearch"
+        android:layout_width="23dp"
+        android:layout_height="23dp"
+        app:layout_constraintTop_toBottomOf="@id/iconsBorder"
+        app:layout_constraintLeft_toLeftOf="@id/iconAdd"
+        android:layout_marginStart="75dp"
+        android:layout_marginVertical="15dp"
+        android:background="@drawable/ic_search"
+        />
+
+    <Button
+        android:id="@+id/iconProfile"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        app:layout_constraintTop_toBottomOf="@id/iconsBorder"
+        app:layout_constraintLeft_toLeftOf="@id/iconSearch"
+        android:layout_marginStart="58dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginVertical="15dp"
+        android:background="@drawable/ic_profile"
+        />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
