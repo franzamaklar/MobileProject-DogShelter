@@ -1,24 +1,26 @@
 package com.example.adopetme.ui.search
 
+import android.content.ContentValues.TAG
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.appcompat.widget.SearchView
-import androidx.appcompat.widget.SearchView.OnQueryTextListener
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.adopetme.databinding.SearchFragmentBinding
-import com.example.adopetme.di.DogRepositoryFactory
+import com.example.adopetme.viewmodel.DogViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class SearchFragment : Fragment() {
 
     private lateinit var binding: SearchFragmentBinding
     private lateinit var adapter:SearchDogAdapter
-    private val dogRepository = DogRepositoryFactory.dogRepository
+    private val viewModel by viewModel<DogViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -53,16 +55,11 @@ class SearchFragment : Fragment() {
             false
         )
         adapter = SearchDogAdapter()
+        viewModel.dogs.observe(viewLifecycleOwner){
+            Log.d(TAG, "Size value: ${it.size}")
+            adapter.setDogs(it)
+        }
         binding.queryResultsRecylcer.adapter = adapter
-    }
-
-    override fun onResume() {
-        super.onResume()
-        updateData()
-    }
-
-    private fun updateData() {
-        adapter.setDogs(dogRepository.getAllDogs())
     }
 
     private fun backToDisplay() {

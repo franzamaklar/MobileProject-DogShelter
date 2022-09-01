@@ -12,4 +12,8 @@
     <string name="title_activity_maps">MapsActivity</string>
     <string name="log_out">LOG OUT</string>
     <string name="upload_picture">UPLOAD PICTURE</string>
+    <string name="newDogName">Name of new dog</string>
+    <string name="newDogBreed">Breed of new dog</string>
+    <string name="newDogAge">Age of new dog</string>
+    <string name="newDogAdding">ADD NEW DOG</string>
 </resources>

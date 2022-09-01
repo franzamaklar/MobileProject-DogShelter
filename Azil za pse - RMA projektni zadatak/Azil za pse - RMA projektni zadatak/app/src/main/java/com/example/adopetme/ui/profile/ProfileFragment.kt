@@ -1,5 +1,6 @@
 package com.example.adopetme.ui.profile
 
+import android.content.ContentValues.TAG
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -7,26 +8,26 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.adopetme.WelcomeActivity
+import com.example.adopetme.ui.WelcomeActivity
 import com.example.adopetme.databinding.ProfileFragmentBinding
-import com.example.adopetme.di.DogRepositoryFactory
 import com.example.adopetme.model.dog.Dog
+import com.example.adopetme.model.dog.DogPhoto
+import com.example.adopetme.viewmodel.DogViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class ProfileFragment: Fragment() {
+class ProfileFragment: Fragment(), OnUploadSelectedListener {
     private lateinit var binding: ProfileFragmentBinding
     private lateinit var firebaseAuth: FirebaseAuth
-    private lateinit var verticalAdapter: VerticalAdapter
-    private lateinit var horizontalAdapter: ProfileDogAdapter
-    private var iterator = 0
+    private lateinit var adapter: ProfileDogAdapter
 
-    private val adapters = mutableListOf<ProfileDogAdapter>()
-    private val dogRepository = DogRepositoryFactory.dogRepository
+    private val viewModel by viewModel<DogViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -36,35 +37,48 @@ class ProfileFragment: Fragment() {
         firebaseAuth = Firebase.auth
         binding = ProfileFragmentBinding.inflate(layoutInflater)
         setUpRecyclerView()
+        binding.uploadButton.setOnClickListener { uploadPicture() }
         binding.backButton.setOnClickListener { backToDisplay() }
         binding.logoutButton.setOnClickListener { logout() }
         return binding.root
     }
 
+    private fun uploadPicture() {
+        getResult.launch("image/*")
+    }
+
+    private val getResult =
+        registerForActivityResult(
+            ActivityResultContracts.GetContent()
+        ){
+            if(it != null){
+                viewModel.saveDogPhoto(
+                    DogPhoto(it,0)
+                )
+            }
+        }
+
     private fun setUpRecyclerView() {
         binding.dogsRecylcer.layoutManager = LinearLayoutManager(
             context,
-            LinearLayout.VERTICAL,
+            LinearLayout.HORIZONTAL,
             false
         )
-        horizontalAdapter = ProfileDogAdapter()
-        val dogs = dogRepository.getAllDogs()
-        val pairOfDogs = mutableListOf<Dog>()
-        while(iterator < dogs.size){
-            pairOfDogs.add(dogs[iterator])
-            if(iterator == 1){
-                horizontalAdapter.setDogs(pairOfDogs)
-                adapters.add((horizontalAdapter))
-                horizontalAdapter = ProfileDogAdapter()
-                pairOfDogs.clear()
-            }
-            iterator++
+        adapter = ProfileDogAdapter()
+        adapter.onUploadSelectedListener = this
+        binding.dogsRecylcer.adapter = adapter
+    }
+
+    override fun onResume() {
+        super.onResume()
+        updateData()
+    }
+
+    private fun updateData() {
+        viewModel.dogPhotos.observe(viewLifecycleOwner){
+            adapter.setDogs(it)
+
         }
-        horizontalAdapter.setDogs(pairOfDogs)
-        adapters.add(horizontalAdapter)
-        verticalAdapter = VerticalAdapter()
-        verticalAdapter.setAdapters(adapters)
-        binding.dogsRecylcer.adapter = verticalAdapter
     }
 
     private fun backToDisplay() {
@@ -80,5 +94,9 @@ class ProfileFragment: Fragment() {
                 WelcomeActivity::class.java
             )
         )
+    }
+
+    override fun OnUploadSelected(dogPhoto: DogPhoto) {
+        viewModel.deleteDogPhoto(dogPhoto)
     }
 }

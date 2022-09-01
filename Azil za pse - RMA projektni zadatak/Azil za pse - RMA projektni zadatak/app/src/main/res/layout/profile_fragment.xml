@@ -106,6 +106,9 @@
         android:id="@+id/dogsRecylcer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         >
     </androidx.recyclerview.widget.RecyclerView>
     </ScrollView>

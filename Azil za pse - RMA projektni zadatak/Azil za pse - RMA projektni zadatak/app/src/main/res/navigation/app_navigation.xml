@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/displayFragment"
         android:name="com.example.adopetme.ui.display.DisplayFragment"
-        android:label="DisplayFragment"
+        android:label="ShowcaseActivity"
         tools:layout="@layout/display_fragment">
         <action
             android:id="@+id/action_displayFragment_to_adoptFragment"
@@ -92,7 +92,7 @@
     </fragment>
     <fragment
         android:id="@+id/inputFragment"
-        android:name="com.example.adopetme.input.InputFragment"
+        android:name="com.example.adopetme.ui.input.InputFragment"
         android:label="InputFragment"
         tools:layout="@layout/input_fragment">
         <action

@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.adopetme.R
 import com.example.adopetme.databinding.DogCellBinding
 import com.example.adopetme.model.dog.Dog
+import com.squareup.picasso.Picasso
 
 class DisplayDogAdapter : RecyclerView.Adapter<DogViewHolder>() {
 
@@ -15,7 +16,7 @@ class DisplayDogAdapter : RecyclerView.Adapter<DogViewHolder>() {
 
     fun setDogs(dogs: List<Dog>){
         this.dogs.clear()
-        this.dogs.addAll(dogs)
+        this.dogs.addAll(dogs.sortedBy { dog -> dog.id })
         this.notifyDataSetChanged()
     }
 
@@ -42,8 +43,9 @@ class DogViewHolder(cellView: View): RecyclerView.ViewHolder(cellView){
         val binding = DogCellBinding.bind(itemView)
         binding.dogGender.text = dog.gender
         binding.dogName.text = dog.name
-        binding.dogAge.text = dog.age.toString()
+        binding.dogAge.text = dog.age
         binding.breedName.text = dog.breed
-        binding.dogPicture.setImageResource(dog.picture)
+        Picasso.get().load(dog.picture).into(binding.dogPicture)
+
     }
 }

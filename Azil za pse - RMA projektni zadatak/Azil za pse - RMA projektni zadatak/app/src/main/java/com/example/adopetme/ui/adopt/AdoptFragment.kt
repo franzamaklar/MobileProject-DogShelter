@@ -8,15 +8,16 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.example.adopetme.data.DogRepository
 import com.example.adopetme.databinding.AdoptFragmentBinding
-import com.example.adopetme.di.DogRepositoryFactory
+import com.example.adopetme.viewmodel.DogViewModel
+import com.squareup.picasso.Picasso
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class AdoptFragment: Fragment() {
 
     private lateinit var binding: AdoptFragmentBinding
-    private var dogRepository: DogRepository = DogRepositoryFactory.dogRepository
+    private val viewModel by viewModel<DogViewModel>()
     private val args: AdoptFragmentArgs by navArgs()
 
     override fun onCreateView(
@@ -27,13 +28,13 @@ class AdoptFragment: Fragment() {
         binding = AdoptFragmentBinding.inflate(layoutInflater)
         binding.backButton.setOnClickListener { backToDisplay() }
         binding.buttonAdopt.setOnClickListener { adopt() }
-        dogRepository.getDogById(args.dogId)?.let { binding.dogAdopt.setImageResource(it.picture) }
+        viewModel.getDogById(args.dogId)?.let { Picasso.get().load(it.picture).into(binding.dogAdopt) }
         return binding.root
     }
 
     private fun adopt() {
-        Toast.makeText(context, "Yay! ${dogRepository.getDogById(args.dogId)?.name} is adopted!", Toast.LENGTH_LONG).show()
-        dogRepository.getDogById(args.dogId)?.let { dogRepository.delete(it) }
+        Toast.makeText(context, "Yay! ${viewModel.getDogById(args.dogId)?.name} is adopted!", Toast.LENGTH_LONG).show()
+        viewModel.getDogById(args.dogId)?.let { viewModel.deleteDog(it) }
         val action = AdoptFragmentDirections.actionAdoptFragmentToDisplayFragment()
         findNavController().navigate(action)
     }

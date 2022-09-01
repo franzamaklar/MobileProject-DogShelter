@@ -1,4 +1,4 @@
-package com.example.adopetme
+package com.example.adopetme.ui
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity

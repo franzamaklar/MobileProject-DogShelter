@@ -6,10 +6,16 @@ buildscript {
 
     ext{
         navigation_version = "2.4.1"
-
         navigation_fragment_ktx = "androidx.navigation:navigation-fragment-ktx:$navigation_version"
         navigation_ui_ktx = "androidx.navigation:navigation-ui-ktx:$navigation_version"
         navigation_safe_args_gradle_plugin = "androidx.navigation:navigation-safe-args-gradle-plugin:$navigation_version"
+
+        lifecycle_scope_version = "2.4.1"
+        lifecylce_scope = "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_scope_version"
+
+        koin_version = "3.1.5"
+        koin = "io.insert-koin:koin-android:$koin_version"
+        koin_navigation = "io.insert-koin:koin-androidx-navigation:$koin_version"
     }
 
     dependencies {

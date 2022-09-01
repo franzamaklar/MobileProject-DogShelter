@@ -4,7 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.adopetme.R
-import com.example.adopetme.ShowcaseActivity
+import com.example.adopetme.ui.ShowcaseActivity
 import com.example.adopetme.databinding.ActivityMapsBinding
 
 import com.google.android.gms.maps.CameraUpdateFactory

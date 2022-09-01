@@ -10,14 +10,15 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.adopetme.databinding.DisplayFragmentBinding
-import com.example.adopetme.di.DogRepositoryFactory
 import com.example.adopetme.ui.map.MapsActivity
+import com.example.adopetme.viewmodel.DogViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class DisplayFragment : Fragment(), OnDogSelectedListener {
     private lateinit var binding: DisplayFragmentBinding
     private lateinit var  adapter: DisplayDogAdapter
-    private val dogRepository = DogRepositoryFactory.dogRepository
+    private val viewModel by viewModel<DogViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -25,6 +26,11 @@ class DisplayFragment : Fragment(), OnDogSelectedListener {
         savedInstanceState: Bundle?
     ): View? {
         binding = DisplayFragmentBinding.inflate(layoutInflater)
+        viewModel.dogs.observe(viewLifecycleOwner){
+            if(it != null && it.isNotEmpty()){
+                adapter.setDogs(it)
+            }
+        }
         setUpRecyclerView()
         binding.iconAdd.setOnClickListener { switchToInput() }
         binding.iconSearch.setOnClickListener { switchToSearch() }
@@ -66,15 +72,6 @@ class DisplayFragment : Fragment(), OnDogSelectedListener {
         adapter = DisplayDogAdapter()
         adapter.onDogSelectedListener = this
         binding.dogRecycler.adapter = adapter
-    }
-
-    override fun onResume() {
-        super.onResume()
-        updateData()
-    }
-
-    private fun updateData() {
-        adapter.setDogs(dogRepository.getAllDogs())
     }
 
 
