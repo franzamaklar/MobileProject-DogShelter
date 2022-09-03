@@ -14,10 +14,10 @@ class DisplayDogAdapter : RecyclerView.Adapter<DogViewHolder>() {
     val dogs = mutableListOf<Dog>()
     var onDogSelectedListener: OnDogSelectedListener? = null
 
-    fun setDogs(dogs: List<Dog>){
-        this.dogs.clear()
-        this.dogs.addAll(dogs.sortedBy { dog -> dog.id })
-        this.notifyDataSetChanged()
+    fun setDogs(dogos: List<Dog>){
+        dogs.clear()
+        dogs.addAll(dogos.sortedBy { dog -> dog.id })
+        notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DogViewHolder{
@@ -30,7 +30,7 @@ class DisplayDogAdapter : RecyclerView.Adapter<DogViewHolder>() {
         val dog = dogs[position]
         holder.bind(dog)
         onDogSelectedListener?.let { onDogSelectedListener ->
-            holder.itemView.setOnClickListener { onDogSelectedListener.onDogSelected(dog.id)}
+            holder.itemView.setOnClickListener { onDogSelectedListener.onDogSelected(dog)}
         }
     }
 
@@ -46,6 +46,5 @@ class DogViewHolder(cellView: View): RecyclerView.ViewHolder(cellView){
         binding.dogAge.text = dog.age
         binding.breedName.text = dog.breed
         Picasso.get().load(dog.picture).into(binding.dogPicture)
-
     }
 }

@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/displayFragment"
         android:name="com.example.adopetme.ui.display.DisplayFragment"
-        android:label="ShowcaseActivity"
+        android:label="DisplayFragment"
         tools:layout="@layout/display_fragment">
         <action
             android:id="@+id/action_displayFragment_to_adoptFragment"
@@ -41,6 +41,13 @@
             app:exitAnim="@anim/slide_down"
             app:popEnterAnim="@anim/slide_up"
             app:popExitAnim="@anim/slide_from_down" />
+        <action
+            android:id="@+id/action_displayFragment_to_petFragment"
+            app:destination="@id/petFragment"
+            app:enterAnim="@anim/slide_from_up"
+            app:exitAnim="@anim/slide_down"
+            app:popEnterAnim="@anim/slide_up"
+            app:popExitAnim="@anim/slide_from_down"/>
     </fragment>
 
     <fragment
@@ -90,6 +97,7 @@
             app:popExitAnim="@anim/slide_to_left"
             />
     </fragment>
+
     <fragment
         android:id="@+id/inputFragment"
         android:name="com.example.adopetme.ui.input.InputFragment"
@@ -102,5 +110,18 @@
             app:exitAnim="@anim/slide_from_down"
              />
     </fragment>
+
+    <fragment
+        android:id="@+id/petFragment"
+        android:name="com.example.adopetme.ui.pet.PetFragment"
+        android:label="PetFragment"
+        tools:layout="@layout/pet_fragment">
+        <action
+            android:id="@+id/action_petFragment_to_displayFragment"
+            app:destination="@id/displayFragment"
+            app:enterAnim="@anim/slide_up"
+            app:exitAnim="@anim/slide_from_down" />
+    </fragment>
+
 
 </navigation>

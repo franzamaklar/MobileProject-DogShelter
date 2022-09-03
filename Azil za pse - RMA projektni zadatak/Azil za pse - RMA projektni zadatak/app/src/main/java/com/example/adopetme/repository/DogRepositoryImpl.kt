@@ -2,6 +2,7 @@ package com.example.adopetme.repository
 
 import android.content.ContentValues.TAG
 import android.net.Uri
+import android.os.Handler
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.example.adopetme.model.dog.Dog
@@ -18,7 +19,7 @@ class DogRepositoryImpl(): DogRepository {
     private val collectionReference: CollectionReference = firebaseStore.collection("dogs")
     private var storageReference = FirebaseStorage.getInstance().reference
 
-    private val liveData: MutableLiveData<List<Dog>> = MutableLiveData<List<Dog>>()
+    private val liveData: MutableLiveData<MutableList<Dog>?> = MutableLiveData<MutableList<Dog>?>()
     private lateinit var dogPicture: Uri
 
     override fun save(dog: Dog) {
@@ -49,8 +50,18 @@ class DogRepositoryImpl(): DogRepository {
                 }
             }
             .addOnFailureListener {
-                Log.e(TAG, it.message ?: "No message")
+                Log.e(TAG, "${it.message}")
             }
+        val handler = Handler()
+        handler.postDelayed(Runnable {
+            run() {
+                val updated: MutableList<Dog>? = liveData.value
+                updated?.add(dog)
+                if (updated != null) {
+                    liveData.postValue(updated)
+                }
+            }
+        }, 2000)
     }
 
     override fun delete(dog: Dog) {
@@ -61,21 +72,33 @@ class DogRepositoryImpl(): DogRepository {
                     if(dogo.data.get("id") as Long? == dog.id){
                         documentReference = collectionReference.document(dogo.id)
                         documentReference.delete()
-                        Log.d(TAG, "Dogo of id: ${dogo.data.get("id")} as ${dogo.data.get("name")} was deleted")
-                        return@addOnSuccessListener
+                        Log.d(TAG, "onSuccess: Dogo of id: ${dogo.data.get("id")} as ${dogo.data.get("name")} was deleted")
                     }
                 }
         }
+        val handler = Handler()
+        handler.postDelayed(Runnable {
+            run() {
+                val updated: MutableList<Dog>? = liveData.value
+                updated?.remove(dog)
+                if (updated != null) {
+                    liveData.postValue(updated)
+                }
+            }
+        }, 2000)
     }
 
     override fun getDogById(id: Long?): Dog? {
-        if (id != null) {
-            return liveData.value?.get(id.toInt())
-        }else
-            return null
+        val dogs = liveData.value?.iterator()
+        dogs?.forEach {
+            if(it.id == id){
+                return it
+            }
+        }
+        return null
     }
 
-    override fun getAllDogs(): MutableLiveData<List<Dog>> {
+    override fun getAllDogs(): MutableLiveData<MutableList<Dog>?> {
         collectionReference.get().addOnSuccessListener { snapshots ->
 
             if (snapshots!= null && !snapshots.isEmpty) {
@@ -95,7 +118,7 @@ class DogRepositoryImpl(): DogRepository {
                 liveData.postValue(dogs)
             } else {
                 Log.d(TAG, "No data")
-                return@addOnSuccessListener
+
             }
         }
         return liveData

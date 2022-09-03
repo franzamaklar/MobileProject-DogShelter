@@ -1,8 +1,7 @@
 package com.example.adopetme.ui.search
 
-import android.content.ContentValues.TAG
+
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -56,8 +55,9 @@ class SearchFragment : Fragment() {
         )
         adapter = SearchDogAdapter()
         viewModel.dogs.observe(viewLifecycleOwner){
-            Log.d(TAG, "Size value: ${it.size}")
-            adapter.setDogs(it)
+            if (it != null) {
+                adapter.setDogs(it)
+            }
         }
         binding.queryResultsRecylcer.adapter = adapter
     }

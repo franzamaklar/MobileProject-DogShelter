@@ -2,10 +2,9 @@ package com.example.adopetme.repository
 
 import android.content.ContentValues.TAG
 import android.net.Uri
-import android.nfc.Tag
+import android.os.Handler
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
-import com.example.adopetme.model.dog.Dog
 import com.example.adopetme.model.dog.DogPhoto
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -22,7 +21,7 @@ class DogPhotoRepositoryImpl: DogPhotoRepository {
     private var storageReference = FirebaseStorage.getInstance().reference
     private val collectionReference: CollectionReference = firebaseStore.collection("users")
 
-    private val liveData: MutableLiveData<List<DogPhoto>> = MutableLiveData<List<DogPhoto>>()
+    private val liveData: MutableLiveData<MutableList<DogPhoto>?> = MutableLiveData<MutableList<DogPhoto>?>()
     private lateinit var dogPicture: Uri
 
     override fun save(dogPhoto: DogPhoto) {
@@ -38,16 +37,26 @@ class DogPhotoRepositoryImpl: DogPhotoRepository {
                     newPhoto["picture"] = it
 
                     documentReference.collection("dogimages").document().set(newPhoto).addOnSuccessListener {
-                        Log.d(TAG, "onSuccess: Dog photo is created for ${firebaseAuth.currentUser!!.uid}")
-                    }
-                        .addOnFailureListener{
-                            error -> Log.d(TAG, "onFailure: ${error.message}")
+                            Log.d(TAG, "onSuccess: Dog photo is created for ${firebaseAuth.currentUser!!.uid}")
                         }
-                }
+                            .addOnFailureListener{
+                                error -> Log.d(TAG, "onFailure: ${error.message}")
+                            }
+                    }
                     .addOnFailureListener{
-                        Log.e(TAG, it.message ?: "No message")
+                        Log.e(TAG, "OnFailure: ${it.message}")
                     }
             }
+        val handle = Handler()
+        handle.postDelayed(Runnable {
+            run() {
+                val updated: MutableList<DogPhoto>? = liveData.value
+                updated?.add(dogPhoto)
+                if (updated != null) {
+                    liveData.postValue(updated)
+                }
+            }
+        }, 2000)
     }
 
     override fun delete(dogPhoto: DogPhoto) {
@@ -60,36 +69,49 @@ class DogPhotoRepositoryImpl: DogPhotoRepository {
                         documentReference = collectionReference.document(firebaseAuth.currentUser!!.uid).collection("dogimages").document(photo.id)
                         documentReference.delete()
                         Log.d(TAG, "Dog photo was deleted")
-                        return@addOnSuccessListener
                     }
                 }
         }
-    }
-
-    override fun getDogPhotoById(id: Long?): DogPhoto? {
-        if(id != null){
-            return liveData.value?.get(id.toInt())
-        }
-        return null
-    }
-
-    override fun getAllDogPhotos(): MutableLiveData<List<DogPhoto>> {
-        collectionReference.document("{$firebaseAuth.currentUser!!.uid}").collection("dogimages").get().addOnSuccessListener { snapshosts ->
-            if (snapshosts != null && !snapshosts.isEmpty) {
-                val photos = mutableListOf<DogPhoto>()
-                for (photo in snapshosts){
-                    dogPicture = Uri.parse(photo.data.get("picture") as String)
-                    photos.add(
-                        DogPhoto(
-                            dogPicture,
-                            photo.data.get("id") as Long?,
-                    ))
+        val handler = Handler()
+        handler.postDelayed(Runnable {
+            run() {
+                val updated: MutableList<DogPhoto>? = liveData.value
+                updated?.remove(dogPhoto)
+                if (updated != null) {
+                    liveData.postValue(updated)
                 }
-                liveData.postValue(photos)
-            }else{
-                Log.d(TAG, "No data")
             }
-        }
+        }, 2000)
+    }
+
+
+    override fun getAllDogPhotos(): MutableLiveData<MutableList<DogPhoto>?> {
+        val handler = Handler()
+        handler.postDelayed(Runnable {
+            if (firebaseAuth.currentUser?.uid != null) {
+                collectionReference.document(firebaseAuth.currentUser!!.uid).collection("dogimages")
+                    .get().addOnSuccessListener { snapshosts ->
+                        if (snapshosts != null && !snapshosts.isEmpty) {
+                            val photos = mutableListOf<DogPhoto>()
+                            for (photo in snapshosts) {
+                                dogPicture = Uri.parse(photo.data.get("picture") as String)
+                                photos.add(
+                                    DogPhoto(
+                                        dogPicture,
+                                        photo.data.get("id") as Long?,
+                                    )
+                                )
+                            }
+                            liveData.postValue(photos)
+                        } else {
+                            Log.d(TAG, "No data")
+                        }
+                    }
+            } else {
+                liveData.value?.clear()
+            }
+
+        }, 2000)
         return liveData
     }
 }

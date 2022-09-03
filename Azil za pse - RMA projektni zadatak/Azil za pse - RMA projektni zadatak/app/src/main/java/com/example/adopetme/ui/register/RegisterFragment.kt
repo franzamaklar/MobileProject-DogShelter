@@ -1,6 +1,7 @@
 package com.example.adopetme.ui.register
 
 import android.os.Bundle
+import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -28,13 +29,21 @@ class RegisterFragment : Fragment() {
         findNavController().navigate(action)
     }
 
-    //Edit everything around signup
 
     private fun moveToValidate() {
         val email = binding.emailET.text.toString()
         val password = binding.passwordET.text.toString()
-        val credentials = "$email,$password"
-        val action = RegisterFragmentDirections.actionRegisterFragmentToRegisterValidationFragment(credentials)
-        findNavController().navigate(action)
+        if (TextUtils.isEmpty(email)) {
+            binding.emailET.setError("Missing e-mail!")
+        } else if (TextUtils.isEmpty(password)) {
+            binding.passwordET.setError("Missing password!")
+        } else {
+            val credentials = "$email,$password"
+            val action =
+                RegisterFragmentDirections.actionRegisterFragmentToRegisterValidationFragment(
+                    credentials
+                )
+            findNavController().navigate(action)
+        }
     }
 }

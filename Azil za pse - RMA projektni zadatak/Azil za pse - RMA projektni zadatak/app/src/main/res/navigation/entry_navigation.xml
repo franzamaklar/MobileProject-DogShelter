@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/welcomeFragment"
         android:name="com.example.adopetme.ui.welcome.WelcomeFragment"
-        android:label="MainActivity"
+        android:label="WelcomeFragment"
         tools:layout="@layout/welcome_fragment">
         <action
             android:id="@+id/action_welcomeFragment_to_loginFragment"

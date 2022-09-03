@@ -9,12 +9,11 @@ import android.widget.ImageView
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.example.adopetme.model.dog.DogPhoto
 import com.example.adopetme.databinding.InputFragmentBinding
 import com.example.adopetme.model.dog.Dog
 import com.example.adopetme.viewmodel.DogViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import kotlin.properties.Delegates
+
 
 
 class InputFragment: Fragment() {
@@ -22,7 +21,6 @@ class InputFragment: Fragment() {
     private lateinit var binding: InputFragmentBinding
     private val viewModel by viewModel<DogViewModel>()
     private lateinit var uploadUri:Uri
-    private var lastID by Delegates.notNull<Int>()
 
 
     private val dogImage: ImageView by lazy {
@@ -48,12 +46,7 @@ class InputFragment: Fragment() {
         }
 
         binding.addButton.setOnClickListener {
-            viewModel.dogs.observe(viewLifecycleOwner){
-                if(it != null && it.isNotEmpty()){
-                    lastID = it.lastIndex
-                }else
-                    lastID = 0
-            }
+            val id: Long? = (0..1000).random().toLong()
             val breedName = binding.breedHolder.text.toString()
             val dogName = binding.nameHolder.text.toString()
             val dogAge = binding.ageHolder.text.toString()
@@ -65,7 +58,7 @@ class InputFragment: Fragment() {
                 dogGender = binding.genderMale.text.toString()
             }
             viewModel.saveDog(Dog(
-                lastID.plus(1).toLong(),
+                id,
                 breedName,
                 dogName,
                 dogGender,

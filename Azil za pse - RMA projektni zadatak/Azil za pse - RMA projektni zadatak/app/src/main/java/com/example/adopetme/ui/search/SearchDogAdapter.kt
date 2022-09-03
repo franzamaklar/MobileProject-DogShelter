@@ -1,7 +1,6 @@
 package com.example.adopetme.ui.search
 
-import android.content.ContentValues.TAG
-import android.util.Log
+
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,7 +10,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.adopetme.R
 import com.example.adopetme.databinding.SearchResultCellBinding
 import com.example.adopetme.model.dog.Dog
-import com.example.adopetme.ui.display.OnDogSelectedListener
 import com.squareup.picasso.Picasso
 
 class SearchDogAdapter : RecyclerView.Adapter<SearchViewHolder>(), Filterable {
@@ -19,14 +17,13 @@ class SearchDogAdapter : RecyclerView.Adapter<SearchViewHolder>(), Filterable {
 
     val dogs = mutableListOf<Dog>()
     val allDogs = mutableListOf<Dog>()
-    var onDogSelectedListener: OnDogSelectedListener? = null
 
     fun setDogs(dogos: List<Dog>){
         dogs.clear()
         allDogs.clear()
         dogs.addAll(dogos.sortedBy { dog -> dog.id })
         allDogs.addAll(dogos.sortedBy { dog -> dog.id })
-        this.notifyDataSetChanged()
+        notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchViewHolder{
@@ -38,9 +35,7 @@ class SearchDogAdapter : RecyclerView.Adapter<SearchViewHolder>(), Filterable {
     override fun onBindViewHolder(holder: SearchViewHolder, position: Int){
         val dog = dogs[position]
         holder.bind(dog)
-        onDogSelectedListener?.let { onDogSelectedListener ->
-            holder.itemView.setOnClickListener { onDogSelectedListener.onDogSelected(dog.id)}
-        }
+
     }
 
     override fun getItemCount(): Int = dogs.count()
@@ -56,7 +51,6 @@ class SearchDogAdapter : RecyclerView.Adapter<SearchViewHolder>(), Filterable {
                 filteredDogs.addAll(allDogs)
             }else{
                 for(Dog in allDogs){
-                    Log.d(TAG, "Dog: ${Dog.breed} was added")
                     if(Dog.breed.lowercase().contains(p0.toString().lowercase())){
                         filteredDogs.add(Dog)
                     }

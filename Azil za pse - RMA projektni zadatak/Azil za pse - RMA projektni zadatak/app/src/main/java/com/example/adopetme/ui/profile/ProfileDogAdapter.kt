@@ -1,15 +1,12 @@
 package com.example.adopetme.ui.profile
 
-import android.content.ContentValues.TAG
-import android.util.Log
+
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.adopetme.R
 import com.example.adopetme.databinding.UploadCellBinding
-import com.example.adopetme.model.dog.Dog
 import com.example.adopetme.model.dog.DogPhoto
 import com.squareup.picasso.Picasso
 
@@ -20,10 +17,9 @@ class ProfileDogAdapter : RecyclerView.Adapter<DogViewHolder>() {
     var onUploadSelectedListener: OnUploadSelectedListener? = null
 
     fun setDogs(dogosPhotos: List<DogPhoto>){
-        this.dogsPhotos.clear()
-        this.dogsPhotos.addAll(dogosPhotos.sortedBy { dog -> dog.id })
-        Log.d(TAG, "Size horizontal adapter Value: ${dogosPhotos.size}")
-        this.notifyDataSetChanged()
+        dogsPhotos.clear()
+        dogsPhotos.addAll(dogosPhotos.sortedBy { dog -> dog.id })
+        notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DogViewHolder {
@@ -37,7 +33,6 @@ class ProfileDogAdapter : RecyclerView.Adapter<DogViewHolder>() {
         holder.bind(dogphoto)
         onUploadSelectedListener?.let { onUploadSelectedListener ->
             holder.itemView.setOnLongClickListener {
-                Log.d(TAG, "Deleted ${dogphoto.picture}")
                 onUploadSelectedListener.OnUploadSelected(dogphoto)
                 true
             }

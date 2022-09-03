@@ -3,6 +3,7 @@ package com.example.adopetme.ui.register
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
+import android.text.TextUtils
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -50,45 +51,52 @@ class RegisterValidationFragment : Fragment() {
         findNavController().navigate(action)
     }
 
-    //Edit everything around signup
 
     private fun signup() {
         val output = args.credentials
         val username = binding.usernameET.text.toString()
+        val validationPassword = binding.passwordET.text.toString()
         val credentials: List<String> = output.split(",")
-        val result: Boolean
 
-        if(credentials.get(1).equals(binding.passwordET.text.toString())) {
-            viewModel.saveUser(
-                User(
-                    "",
-                    username,
-                    credentials.get(0),
-                    credentials.get(1),
-                    "",
-                    false,
-                    false
+        if (TextUtils.isEmpty(username)) {
+            binding.usernameET.setError("Missing username!")
+        } else if (TextUtils.isEmpty(validationPassword)) {
+            binding.passwordET.setError("Missing password!")
+        } else {
+            if (credentials.get(1).equals(validationPassword)) {
+                viewModel.saveUser(
+                    User(
+                        "",
+                        username,
+                        credentials.get(0),
+                        credentials.get(1),
+                        "https://firebasestorage.googleapis.com/v0/b/adopet-me-project.appspot.com/o/images%2FusersIcons%2F2131165306?alt=media&token=3083b02e-9154-4464-aff3-d2e7c4bc44da",
+                        false,
+                        false
+                    )
                 )
-            )
-            handler.postDelayed(Runnable
-            {
-                run(){
-                    if(firebaseAuth.currentUser !=  null){
-                        Toast.makeText(context, "Sign in successful",  Toast.LENGTH_LONG).show()
-                        startActivity(
-                            Intent(
-                                context,
-                                ShowcaseActivity::class.java
+                handler.postDelayed(Runnable
+                {
+                    run() {
+                        if (firebaseAuth.currentUser != null) {
+                            Toast.makeText(context, "Sign in successful", Toast.LENGTH_LONG).show()
+                            startActivity(
+                                Intent(
+                                    context,
+                                    ShowcaseActivity::class.java
+                                )
                             )
-                        )
-                    }else{
-                        Toast.makeText(context, "Unsuccessful sign in", Toast.LENGTH_LONG).show()
+                        } else {
+                            Toast.makeText(context, "Unsuccessful sign in", Toast.LENGTH_LONG)
+                                .show()
+                        }
                     }
-                }
-            }, 2000)
+                }, 2000
+                )
 
-        }else{
-            Toast.makeText(context, "Password is not compatible",  Toast.LENGTH_LONG).show()
+            } else {
+                Toast.makeText(context, "Password is not compatible", Toast.LENGTH_LONG).show()
+            }
         }
 
     }
